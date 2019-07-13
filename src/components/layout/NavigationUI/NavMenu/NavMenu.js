@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavLinkDropdown from "./NavLinkDropdown/NavLinkDropdown";
 import NavLink from "./NavLink/NavLink";
+import "./NavMenu.css";
 
 const NavMenu = props => {
   const [showMenu, setShowMenu] = useState(false);
@@ -11,6 +12,14 @@ const NavMenu = props => {
 
   let links = null;
   const show = showMenu ? "show" : "";
+
+  const authLinks = (
+    <React.Fragment>
+      <NavLink linkTo="/login" text="Login" active={false} />
+      <NavLink linkTo="/" text="SignUp" active={false} />
+    </React.Fragment>
+  );
+
   if (props.links) {
     links = props.links.map((link, index) => {
       if (link.dropdown) {
@@ -49,6 +58,7 @@ const NavMenu = props => {
       )}
       <div className={`collapse navbar-collapse ${show}`}>
         <ul className="navbar-nav">{links}</ul>
+        <ul className="navbar-nav ml-auto auth">{authLinks}</ul>
       </div>
     </React.Fragment>
   );

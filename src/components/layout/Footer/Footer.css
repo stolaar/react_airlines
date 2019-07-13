@@ -2,3 +2,13 @@ footer {
   min-height: 20vh;
   z-index: 100;
 }
+
+.lang-item a {
+  color: white;
+  text-decoration: underline;
+}
+
+.lang-item a:hover,
+a:active {
+  text-decoration: none;
+}

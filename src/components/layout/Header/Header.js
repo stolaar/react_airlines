@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import { FormattedMessage } from "react-intl";
 
 function Header(props) {
   return (
@@ -11,8 +12,10 @@ function Header(props) {
           <p className="lead">{props.lead}</p>
           <hr className="my-4" />
           <p>
-            It uses utility classes for typography and spacing to space content
-            out within the larger container.
+            <FormattedMessage
+              id="header.desc"
+              defaultMessage="Default message for header desc"
+            />
           </p>
           <p className="lead">
             <a className="btn btn-primary btn-lg" href="/" role="button">

@@ -2,7 +2,6 @@ import React from "react";
 import NavLink from "./../NavLink/NavLink";
 
 const NavLinkDropdown = props => {
-  console.log("Drop", props.text);
   let active = false;
   const links = props.links.map(function(link, index) {
     if (link.active) {

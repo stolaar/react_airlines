@@ -3,7 +3,6 @@ import NavBrand from "./NavigationUI/NavBrand/NavBrand";
 import NavMenu from "./NavigationUI/NavMenu/NavMenu";
 
 const Navigation = props => {
-  console.log("Navigation", props);
   return (
     <nav
       style={{ borderRadius: props.borderRadius }}

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import NavLinkDropdown from "./NavLinkDropdown/NavLinkDropdown";
 import NavLink from "./NavLink/NavLink";
 
 const NavMenu = props => {
-  console.log("Menu", props.links);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const onShowMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   let links = null;
+  const show = showMenu ? "show" : "";
   if (props.links) {
     links = props.links.map((link, index) => {
       if (link.dropdown) {
@@ -34,18 +40,14 @@ const NavMenu = props => {
         <button
           className="navbar-toggler"
           type="button"
-          data-toggle="collapse"
-          data-target={props.linksId}
-          aria-controls={props.linksId}
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          onClick={() => onShowMenu()}
         >
           <span className="navbar-toggler-icon" />
         </button>
       ) : (
         ""
       )}
-      <div className="collapse navbar-collapse" id={props.linksId}>
+      <div className={`collapse navbar-collapse ${show}`}>
         <ul className="navbar-nav">{links}</ul>
       </div>
     </React.Fragment>

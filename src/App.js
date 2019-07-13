@@ -39,14 +39,20 @@ subNavProps.brand = { linkTo: "/", text: "Search" };
 
 function App() {
   return (
-    <div>
+    <React.Fragment>
       <Navigation linkId="navbarNav" {...navProps} />
-      <Header heading="Stole Airlines" lead={headingLead} />
-      <div className="container">
-        <Navigation linkId="navbarSub" borderRadius={"7px"} {...subNavProps} />
+      <div>
+        <Header heading="Stole Airlines" lead={headingLead} />
+        <div className="container">
+          <Navigation
+            linkId="navbarSub"
+            borderRadius={"7px"}
+            {...subNavProps}
+          />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </React.Fragment>
   );
 }
 

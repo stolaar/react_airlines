@@ -32,6 +32,25 @@ export default function Footer(props) {
         </li>
       </ul>
 
+      <ul className="pt-2 list-unstyled list-inline text-center">
+        <li className="lang-item list-inline-item">
+          <a href="/" className="btn-floating btn-fb mx-1">
+            Macedonian
+          </a>
+        </li>
+        <li className="lang-item list-inline-item">
+          <a href="/" className="btn-floating btn-tw mx-1">
+            English
+          </a>
+        </li>
+
+        <li className="list-inline-item lang-item">
+          <a href="/" className="btn-floating btn-li mx-1">
+            Albanian
+          </a>
+        </li>
+      </ul>
+
       <div className="footer-copyright text-center py-3">
         Made with <i style={{ color: "red" }} className="fas fa-fire-alt" /> by
         Aleksandar

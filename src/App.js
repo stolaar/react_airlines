@@ -1,24 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Navigation from "./components/layout/Navigation";
+import "./App.css";
+import Header from "./components/layout/Header/Header";
+import Footer from "./components/layout/Footer/Footer";
+
+const headingLead = `This is a simple hero unit, a simple jumbotron-style component for
+calling extra attention to featured content or information.`;
+
+var navProps = {};
+navProps.brand = { linkTo: "/", text: "Airlines" };
+navProps.links = [
+  { linkTo: "/", text: "Offers" },
+  { linkTo: "/", text: "Destinations" },
+  {
+    dropdown: true,
+    text: "Plans",
+    links: [
+      { linkTo: "/", text: "Link1" },
+      { linkTo: "/", text: "Dropdown Link 2", active: true }
+    ]
+  }
+];
+
+var subNavProps = {};
+subNavProps.brand = { linkTo: "/", text: "Search" };
+// subNavProps.links = [
+//   { linkTo: "#", text: "Link 1" },
+//   { linkTo: "#", text: "Link 2" },
+//   {
+//     dropdown: true,
+//     text: "Dropdown",
+//     links: [
+//       { linkTo: "#", text: "Dropdown Link 1" },
+//       { linkTo: "#", text: "Dropdown Link 2", active: true }
+//     ]
+//   }
+// ];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navigation linkId="navbarNav" {...navProps} />
+      <Header heading="Stole Airlines" lead={headingLead} />
+      <div className="container">
+        <Navigation linkId="navbarSub" borderRadius={"7px"} {...subNavProps} />
+      </div>
+      <Footer />
     </div>
   );
 }

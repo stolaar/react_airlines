@@ -1,0 +1,35 @@
+.jumbotron {
+  margin-bottom: 0px;
+  position: relative;
+  background: none;
+}
+
+.jumbotron .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../../../assets/header-background.jpg");
+  background-position: 0% 25%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: grayscale(60%);
+}
+
+.content-bg {
+  background-color: gray;
+  opacity: 0.8;
+  padding: 10px 10px;
+  position: relative;
+}
+
+.content h1,
+p {
+  color: white !important;
+  z-index: 200;
+}
+.content .btn {
+  opacity: 100;
+  position: relative;
+}

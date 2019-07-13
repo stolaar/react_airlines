@@ -13,12 +13,7 @@ const NavMenu = props => {
   let links = null;
   const show = showMenu ? "show" : "";
 
-  const authLinks = (
-    <React.Fragment>
-      <NavLink linkTo="/login" text="Login" active={false} />
-      <NavLink linkTo="/" text="SignUp" active={false} />
-    </React.Fragment>
-  );
+  let authLinks = null;
 
   if (props.links) {
     links = props.links.map((link, index) => {
@@ -42,6 +37,12 @@ const NavMenu = props => {
         );
       }
     });
+    authLinks = (
+      <React.Fragment>
+        <NavLink linkTo="/login" text="Login" active={false} />
+        <NavLink linkTo="/" text="Sign up" active={false} />
+      </React.Fragment>
+    );
   }
   return (
     <React.Fragment>

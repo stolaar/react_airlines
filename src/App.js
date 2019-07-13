@@ -5,6 +5,7 @@ import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
 import { Switch, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 const headingLead = `This is a simple hero unit, a simple jumbotron-style component for
 calling extra attention to featured content or information.`;
@@ -26,18 +27,6 @@ navProps.links = [
 
 var subNavProps = {};
 subNavProps.brand = { linkTo: "/", text: "Search" };
-// subNavProps.links = [
-//   { linkTo: "#", text: "Link 1" },
-//   { linkTo: "#", text: "Link 2" },
-//   {
-//     dropdown: true,
-//     text: "Dropdown",
-//     links: [
-//       { linkTo: "#", text: "Dropdown Link 1" },
-//       { linkTo: "#", text: "Dropdown Link 2", active: true }
-//     ]
-//   }
-// ];
 
 function App() {
   return (
@@ -53,6 +42,7 @@ function App() {
           />
           <Switch>
             <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </Switch>
         </div>
         <Footer />

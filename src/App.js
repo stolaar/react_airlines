@@ -34,21 +34,15 @@ function App(props) {
   return (
     <React.Fragment>
       <Navigation linkId="navbarNav" {...navProps} />
-      <div>
-        <Header heading="Stole Airlines" lead={headingLead} />
-        <div className="container">
-          <Navigation
-            linkId="navbarSub"
-            borderRadius={"7px"}
-            {...subNavProps}
-          />
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-          </Switch>
-        </div>
-        <Footer />
+      <Header heading="Stole Airlines" lead={headingLead} />
+      <div className="container">
+        <Navigation linkId="navbarSub" borderRadius={"7px"} {...subNavProps} />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
       </div>
+      <Footer />
     </React.Fragment>
   );
 }

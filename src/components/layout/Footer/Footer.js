@@ -1,7 +1,14 @@
 import React from "react";
 import "./Footer.css";
+import { connect } from "react-redux";
+import { changeLanguage } from "../../../actions/languageActions";
 
-export default function Footer(props) {
+function Footer(props) {
+  const changeLanguageHandler = (e, lang) => {
+    e.preventDefault();
+    props.changeLanguage(lang);
+  };
+
   return (
     <footer className="page-footer text-white bg-dark font-small special-color-dark ">
       <ul className="pt-4 list-unstyled list-inline text-center">
@@ -34,20 +41,29 @@ export default function Footer(props) {
 
       <ul className="pt-2 list-unstyled list-inline text-center">
         <li className="lang-item list-inline-item">
-          <a href="/" className="btn-floating btn-fb mx-1">
+          <button
+            onClick={e => changeLanguageHandler(e, "mk")}
+            className="btn-floating lang-btn mx-1"
+          >
             Macedonian
-          </a>
+          </button>
         </li>
         <li className="lang-item list-inline-item">
-          <a href="/" className="btn-floating btn-tw mx-1">
+          <button
+            onClick={e => changeLanguageHandler(e, "en")}
+            className="btn-floating lang-btn mx-1"
+          >
             English
-          </a>
+          </button>
         </li>
 
         <li className="list-inline-item lang-item">
-          <a href="/" className="btn-floating btn-li mx-1">
+          <button
+            onClick={e => changeLanguageHandler(e, "sq")}
+            className="btn-floating lang-btn mx-1"
+          >
             Albanian
-          </a>
+          </button>
         </li>
       </ul>
 
@@ -58,3 +74,12 @@ export default function Footer(props) {
     </footer>
   );
 }
+
+const mapDispatchToProps = dispatch => ({
+  changeLanguage: lang => dispatch(changeLanguage(lang))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Footer);

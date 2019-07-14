@@ -3,12 +3,15 @@ footer {
   z-index: 100;
 }
 
-.lang-item a {
+.lang-btn {
+  background-color: transparent;
+  border: none;
   color: white;
   text-decoration: underline;
+  cursor: pointer;
 }
 
-.lang-item a:hover,
-a:active {
+.lang-btn:hover,
+.lang-btn:active {
   text-decoration: none;
 }

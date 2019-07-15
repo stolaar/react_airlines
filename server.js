@@ -11,6 +11,7 @@ app.use(function(req, res, next) {
   res.setHeader("Airlines", "powered by Stola");
   next();
 });
+const passport = require("passport");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,7 +20,8 @@ mongoose
   .connect(keys.MongoURI, { useNewUrlParser: true })
   .then(() => console.log("MongoDB connected!"))
   .catch(err => console.log(err));
-
+app.use(passport.initialize());
+require("./config/passport")(passport);
 app.use("/api/users", users);
 
 app.listen(PORT, () => {

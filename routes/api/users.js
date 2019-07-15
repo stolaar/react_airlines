@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
+const secret = require("../../config/keys").secretOrKey;
 
 const saltRounds = 10;
 
@@ -36,11 +39,22 @@ router.post("/login", (req, res) => {
       if (!user) {
         res.send("No such a user");
       }
-      bcrypt.compare(req.body.password, user.password, (err, logRes) => {
-        if (err) {
-          res.status(400).send(err);
+      bcrypt.compare(req.body.password, user.password).then(isMatch => {
+        if (isMatch) {
+          const payload = {
+            id: user._id,
+            name: user.name
+          };
+          jwt.sign(payload, secret, { expiresIn: 36000 }, (err, token) => {
+            if (err) {
+              res.status(500).json({ error: "Error signing token", raw: err });
+            }
+            res.json({
+              success: true,
+              token: `Bearer ${token}`
+            });
+          });
         }
-        res.send(logRes);
       });
     })
     .catch(err => console.log(err));

@@ -35,10 +35,10 @@ function Register(params) {
               id="exampleCheck1"
             />
             <label className="form-check-label" for="exampleCheck1">
-              Check me out
+              I agree with the <a href="/register">Terms and conditions</a>
             </label>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="mt-2 btn btn-primary">
             Submit
           </button>
         </form>

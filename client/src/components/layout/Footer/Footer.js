@@ -68,8 +68,8 @@ function Footer(props) {
       </ul>
 
       <div className="footer-copyright text-center py-3">
-        Made with <i style={{ color: "red" }} className="fas fa-fire-alt" /> by
-        Aleksandar
+        &copy; {new Date().getFullYear()}, Made with pure{" "}
+        <i style={{ color: "red" }} className="fas fa-fire-alt" /> by Aleksandar
       </div>
     </footer>
   );

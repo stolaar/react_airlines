@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authActions";
+import { withRouter } from "react-router-dom";
 
 function Login(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    props.auth.isAuthenticated && props.history.push("/");
+  }, [props]);
+
+  const onSubmit = e => {
+    console.log(email, password);
+    const userData = {
+      email,
+      password
+    };
+    props.loginUser(userData);
+    e.preventDefault();
+  };
   return (
     <div className="row p-4">
       <div className="col-md-12">
         <h2>Login</h2>
-        <form>
-          <div classNameName="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+        <form onSubmit={e => onSubmit(e)}>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Email address</label>
             <input
               type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
@@ -19,24 +40,16 @@ function Login(props) {
               We'll never share your email with anyone else.
             </small>
           </div>
-          <div className="form-group">
-            <label for="exampleInputPassword1">Password</label>
+          <div className="pt-2 form-group">
+            <label htmlFor="exampleInputPassword1">Password</label>
             <input
+              value={password}
+              onChange={e => setPassword(e.target.value)}
               type="password"
               className="form-control"
               id="exampleInputPassword1"
               placeholder="Password"
             />
-          </div>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" for="exampleCheck1">
-              Check me out
-            </label>
           </div>
           <button type="submit" className="btn btn-primary">
             Submit
@@ -47,4 +60,15 @@ function Login(props) {
   );
 }
 
-export default Login;
+const mapStateToProps = ({ auth }) => ({
+  auth
+});
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: data => dispatch(loginUser(data))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Login));

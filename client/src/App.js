@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navigation from "./components/layout/Navigation";
 import "./App.css";
 import Header from "./components/layout/Header/Header";
@@ -10,6 +10,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser } from "./actions/authActions";
+import store from "./store";
 const headingLead = `This is a simple hero unit, a simple jumbotron-style component for
 calling extra attention to featured content or information.`;
 
@@ -31,19 +32,18 @@ navProps.links = [
 const subNavProps = {};
 subNavProps.brand = { linkTo: "/", text: "Search" };
 
+if (localStorage.jwtToken) {
+  const token = localStorage.jwtToken;
+  const decoded = jwt_decode(token);
+  if (decoded.exp < Date.now() / 1000) {
+    //props.setCurrentUser({});
+    store.dispatch(setCurrentUser({}));
+  } else {
+    store.dispatch(setCurrentUser(decoded));
+  }
+}
+
 function App(props) {
-  useEffect(() => {
-    if (localStorage.getItem("jwtToken")) {
-      let query = localStorage.getItem("jwtToken").split(" ");
-      const token = query.pop();
-      const decoded = jwt_decode(token);
-      if (decoded.exp < Date.now() / 1000) {
-        props.setCurrentUser({});
-      } else {
-        props.setCurrentUser(decoded);
-      }
-    }
-  });
   return (
     <React.Fragment>
       <Navigation linkId="navbarNav" {...navProps} />

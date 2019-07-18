@@ -4,6 +4,7 @@ import NavLink from "./NavLink/NavLink";
 import "./NavMenu.css";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../../actions/authActions";
+import { withRouter } from "react-router-dom";
 
 const NavMenu = props => {
   const [showMenu, setShowMenu] = useState(false);
@@ -54,7 +55,7 @@ const NavMenu = props => {
       <React.Fragment>
         <NavLink linkTo="/" text={user.name} active={false} />
         <NavLink
-          onClick={() => props.logoutUser()}
+          onClick={() => props.logoutUser(props.history)}
           linkTo="/"
           text="Log out"
           active={false}
@@ -88,10 +89,10 @@ const NavMenu = props => {
 const mapStateToProps = ({ auth }) => ({ auth });
 
 const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: history => dispatch(logoutUser(history))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NavMenu);
+)(withRouter(NavMenu));

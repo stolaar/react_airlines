@@ -36,7 +36,6 @@ if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   const decoded = jwt_decode(token);
   if (decoded.exp < Date.now() / 1000) {
-    //props.setCurrentUser({});
     store.dispatch(setCurrentUser({}));
   } else {
     store.dispatch(setCurrentUser(decoded));

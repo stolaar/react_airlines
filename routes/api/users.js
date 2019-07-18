@@ -12,6 +12,7 @@ router.post("/register", (req, res) => {
   User.findOne({ email: req.body.email })
     .then(result => {
       if (result) {
+        console.log("User already exist");
         res.send("User already exist");
       } else {
         bcrypt.hash(req.body.password, saltRounds, (err, hash) => {

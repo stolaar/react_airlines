@@ -2,20 +2,27 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
+import TextInput from "./../common/TextInput";
 
 function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [state, setState] = useState({
+    email: "",
+    password: ""
+  });
 
   useEffect(() => {
     props.auth.isAuthenticated && props.history.push("/");
   }, [props]);
 
+  const onChangeHandler = e => {
+    e.preventDefault();
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
   const onSubmit = e => {
-    console.log(email, password);
     const userData = {
-      email,
-      password
+      email: state.email,
+      password: state.password
     };
     props.loginUser(userData);
     e.preventDefault();
@@ -25,32 +32,26 @@ function Login(props) {
       <div className="col-md-12">
         <h2>Login</h2>
         <form onSubmit={e => onSubmit(e)}>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-            />
-            <small id="emailHelp" className="form-text text-muted">
-              We'll never share your email with anyone else.
-            </small>
-          </div>
-          <div className="pt-2 form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
-            <input
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              type="password"
-              className="form-control"
-              id="exampleInputPassword1"
-              placeholder="Password"
-            />
-          </div>
+          <TextInput
+            onChange={e => onChangeHandler(e)}
+            value={state.email}
+            id="email1"
+            name="email"
+            label="Email address"
+            type="email"
+            desc="email"
+            placeholder="Enter e-mail"
+          />
+          <TextInput
+            onChange={e => onChangeHandler(e)}
+            id="password1"
+            name="password"
+            label="Password"
+            type="password"
+            desc="password"
+            placeholder="Enter password"
+          />
+
           <button type="submit" className="btn btn-primary">
             Submit
           </button>

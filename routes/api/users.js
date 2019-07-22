@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
-const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const secret = require("../../config/keys").secretOrKey;
 const validateRegister = require("../../validation/register");
@@ -13,27 +12,32 @@ const saltRounds = 10;
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegister(req.body);
   if (!isValid) {
-    res.status(400).send({ errors });
+    res.status(400).send(errors);
   } else {
     User.findOne({ email: req.body.email })
       .then(result => {
         if (result) {
           errors.email = "User already exist";
-          res.status(400).send({ errors });
+          res.status(400).send(errors);
         } else {
           bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-            const newUser = new User({
-              name: req.body.name,
-              email: req.body.email,
-              password: hash
-            });
+            if (err) {
+              errors.password = "Wrong password";
+              res.status(400).send(errors);
+            } else {
+              const newUser = new User({
+                name: req.body.name,
+                email: req.body.email,
+                password: hash
+              });
 
-            newUser
-              .save()
-              .then(user => {
-                res.send(user);
-              })
-              .catch(error => console.log(error));
+              newUser
+                .save()
+                .then(user => {
+                  res.send(user);
+                })
+                .catch(error => console.log(error));
+            }
           });
         }
       })
@@ -44,36 +48,37 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLogin(req.body);
   if (!isValid) {
-    res.status(400).send({ errors });
-  }
-  User.findOne({ email: req.body.email })
-    .then(user => {
-      if (!user) {
-        errors.email = "User not found";
-        res.status(400).send({ errors });
-      } else {
-        bcrypt.compare(req.body.password, user.password).then(isMatch => {
-          if (isMatch) {
-            const payload = {
-              id: user._id,
-              name: user.name
-            };
-            jwt.sign(payload, secret, { expiresIn: 36000 }, (err, token) => {
-              if (err) {
-                res
-                  .status(500)
-                  .json({ error: "Error signing token", raw: err });
-              }
-              res.json({
-                success: true,
-                token: `Bearer ${token}`
+    res.status(400).send(errors);
+  } else {
+    User.findOne({ email: req.body.email })
+      .then(user => {
+        if (!user) {
+          errors.email = "User not found";
+          res.status(400).send(errors);
+        } else {
+          bcrypt.compare(req.body.password, user.password).then(isMatch => {
+            if (isMatch) {
+              const payload = {
+                id: user._id,
+                name: user.name
+              };
+              jwt.sign(payload, secret, { expiresIn: 36000 }, (err, token) => {
+                if (err) {
+                  res
+                    .status(500)
+                    .json({ error: "Error signing token", raw: err });
+                }
+                res.json({
+                  success: true,
+                  token: `Bearer ${token}`
+                });
               });
-            });
-          }
-        });
-      }
-    })
-    .catch(err => console.log(err));
+            }
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  }
 });
 
 router.get("/", (req, res) => {

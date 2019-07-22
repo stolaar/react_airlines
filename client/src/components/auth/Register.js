@@ -11,15 +11,16 @@ function Register(props) {
     password: "",
     confirmPassword: ""
   });
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    setErrors({ ...props.errors.errors });
+  }, [props.errors]);
 
   const onChangeHandler = e => {
-    console.log(e.target);
     e.preventDefault();
     setState({ ...state, [e.target.name]: e.target.value });
   };
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
   const onSubmitHandler = e => {
     e.preventDefault();
     const userData = {
@@ -42,6 +43,7 @@ function Register(props) {
             label="Name"
             type="text"
             desc="name"
+            error={errors.name}
             placeholder="Enter name"
           />
           <TextInput
@@ -51,6 +53,7 @@ function Register(props) {
             label="Email address"
             type="email"
             desc="email"
+            error={errors.email}
             placeholder="Enter e-mail"
           />
           <TextInput
@@ -60,6 +63,7 @@ function Register(props) {
             label="Password"
             type="password"
             desc="password"
+            error={errors.password}
             placeholder="Enter password"
           />
           <TextInput
@@ -69,6 +73,7 @@ function Register(props) {
             label="Confirm password"
             type="password"
             desc="password2"
+            error={errors.password2}
             placeholder="Confirm your password"
           />
 
@@ -91,7 +96,7 @@ function Register(props) {
   );
 }
 
-const mapStateToProps = ({ lang }) => ({ lang });
+const mapStateToProps = ({ lang, errors }) => ({ lang, errors });
 
 const mapDispatchToProps = dispatch => ({
   register: (data, history) => dispatch(register(data, history))

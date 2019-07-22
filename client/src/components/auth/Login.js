@@ -9,16 +9,18 @@ function Login(props) {
     email: "",
     password: ""
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     props.auth.isAuthenticated && props.history.push("/");
-  }, [props]);
-
+  }, [props.auth, props.history]);
+  useEffect(() => {
+    setErrors({ ...props.errors.errors });
+  }, [props.errors]);
   const onChangeHandler = e => {
     e.preventDefault();
     setState({ ...state, [e.target.name]: e.target.value });
   };
-
   const onSubmit = e => {
     const userData = {
       email: state.email,
@@ -40,6 +42,7 @@ function Login(props) {
             label="Email address"
             type="email"
             desc="email"
+            error={errors.email}
             placeholder="Enter e-mail"
           />
           <TextInput
@@ -49,6 +52,7 @@ function Login(props) {
             label="Password"
             type="password"
             desc="password"
+            error={errors.password}
             placeholder="Enter password"
           />
 
@@ -61,8 +65,9 @@ function Login(props) {
   );
 }
 
-const mapStateToProps = ({ auth }) => ({
-  auth
+const mapStateToProps = ({ auth, errors }) => ({
+  auth,
+  errors
 });
 
 const mapDispatchToProps = dispatch => ({

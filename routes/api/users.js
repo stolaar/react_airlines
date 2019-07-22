@@ -5,58 +5,73 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const secret = require("../../config/keys").secretOrKey;
+const validateRegister = require("../../validation/register");
+const validateLogin = require("../../validation/login");
 
 const saltRounds = 10;
 
 router.post("/register", (req, res) => {
-  User.findOne({ email: req.body.email })
-    .then(result => {
-      if (result) {
-        console.log("User already exist");
-        res.send("User already exist");
-      } else {
-        bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-          const newUser = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: hash
-          });
+  const { errors, isValid } = validateRegister(req.body);
+  if (!isValid) {
+    res.status(400).send({ errors });
+  } else {
+    User.findOne({ email: req.body.email })
+      .then(result => {
+        if (result) {
+          errors.email = "User already exist";
+          res.status(400).send({ errors });
+        } else {
+          bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+            const newUser = new User({
+              name: req.body.name,
+              email: req.body.email,
+              password: hash
+            });
 
-          newUser
-            .save()
-            .then(user => {
-              res.send(user);
-            })
-            .catch(error => console.log(error));
-        });
-      }
-    })
-    .catch(err => console.log(err));
+            newUser
+              .save()
+              .then(user => {
+                res.send(user);
+              })
+              .catch(error => console.log(error));
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  }
 });
 
 router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLogin(req.body);
+  if (!isValid) {
+    res.status(400).send({ errors });
+  }
   User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
-        res.send("No such a user");
-      }
-      bcrypt.compare(req.body.password, user.password).then(isMatch => {
-        if (isMatch) {
-          const payload = {
-            id: user._id,
-            name: user.name
-          };
-          jwt.sign(payload, secret, { expiresIn: 36000 }, (err, token) => {
-            if (err) {
-              res.status(500).json({ error: "Error signing token", raw: err });
-            }
-            res.json({
-              success: true,
-              token: `Bearer ${token}`
+        errors.email = "User not found";
+        res.status(400).send({ errors });
+      } else {
+        bcrypt.compare(req.body.password, user.password).then(isMatch => {
+          if (isMatch) {
+            const payload = {
+              id: user._id,
+              name: user.name
+            };
+            jwt.sign(payload, secret, { expiresIn: 36000 }, (err, token) => {
+              if (err) {
+                res
+                  .status(500)
+                  .json({ error: "Error signing token", raw: err });
+              }
+              res.json({
+                success: true,
+                token: `Bearer ${token}`
+              });
             });
-          });
-        }
-      });
+          }
+        });
+      }
     })
     .catch(err => console.log(err));
 });

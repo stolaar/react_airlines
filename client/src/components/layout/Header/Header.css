@@ -14,11 +14,12 @@
   background-position: 0% 25%;
   background-size: cover;
   background-repeat: no-repeat;
-  filter: grayscale(60%);
+  /* filter: grayscale(60%); */
 }
 
 .content-bg {
-  background-color: rgb(128, 128, 128, 0.8);
+  background-color: rgb(128, 128, 128, 0.7);
+  border-radius: 7px;
   padding: 10px 10px;
   position: relative;
 }

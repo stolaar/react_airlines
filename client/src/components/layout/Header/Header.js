@@ -2,16 +2,20 @@ import React from "react";
 import "./Header.css";
 import { FormattedMessage } from "react-intl";
 import Tabs from "../../tabs/Tabs";
+import Panel from "../../flights/Panel";
 
 function Header(props) {
   return (
     <div className="jumbotron">
       <div className="bg" />
       <div className="content-bg">
-        <div className="content text-center">
-          <h1 className="display-4">{props.heading}</h1>
-          <Tabs />
-          <p className="lead">{props.lead}</p>
+        <div className="content ">
+          <div className="text-center">
+            <h1 className="display-4">{props.heading}</h1>
+            <Tabs />
+          </div>
+          <Panel />
+
           <hr className="my-4" />
           <p>
             <FormattedMessage

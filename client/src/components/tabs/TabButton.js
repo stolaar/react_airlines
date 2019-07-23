@@ -1,7 +1,7 @@
 import React from "react";
 
 function TabButton(props) {
-  const activeBtn = props.isActive ? "btn-primary" : "btn-secondary";
+  const activeBtn = props.isActive ? "btn-primary" : "btn-dark";
   const classes = ["btn", activeBtn];
 
   return (

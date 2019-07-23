@@ -1,9 +1,14 @@
 import React from "react";
 
 function TabButton(props) {
+  const activeBtn = props.isActive ? "btn-primary" : "btn-secondary";
+  const classes = ["btn", activeBtn];
+
   return (
     <li className="tab-btn">
-      <button className="btn btn-primary">{props.btnName}</button>
+      <button onClick={props.onClick} className={classes.join(" ")}>
+        {props.btnName}
+      </button>
     </li>
   );
 }

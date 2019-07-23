@@ -1,0 +1,10 @@
+.tabs {
+  list-style: none;
+  margin: 0 auto;
+}
+
+.tab-btn {
+  display: inline-block;
+  justify-content: space-around;
+  margin: 5px;
+}

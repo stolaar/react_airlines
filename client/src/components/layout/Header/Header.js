@@ -1,14 +1,16 @@
 import React from "react";
 import "./Header.css";
 import { FormattedMessage } from "react-intl";
+import Tabs from "../../tabs/Tabs";
 
 function Header(props) {
   return (
     <div className="jumbotron">
       <div className="bg" />
       <div className="content-bg">
-        <div className="content">
+        <div className="content text-center">
           <h1 className="display-4">{props.heading}</h1>
+          <Tabs />
           <p className="lead">{props.lead}</p>
           <hr className="my-4" />
           <p>

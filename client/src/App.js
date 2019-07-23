@@ -15,7 +15,7 @@ const headingLead = `This is a simple hero unit, a simple jumbotron-style compon
 calling extra attention to featured content or information.`;
 
 const navProps = {};
-navProps.brand = { linkTo: "/", text: "Airlines" };
+navProps.brand = { linkTo: "/", text: "Airlineser" };
 navProps.links = [
   { linkTo: "/", text: "Offers" },
   { linkTo: "/", text: "Destinations" },
@@ -46,7 +46,7 @@ function App(props) {
   return (
     <React.Fragment>
       <Navigation linkId="navbarNav" {...navProps} />
-      <Header heading="Stole Airlines" lead={headingLead} />
+      <Header heading={navProps.brand.text} lead={headingLead} />
       <div className="container">
         <Navigation linkId="navbarSub" borderRadius={"7px"} {...subNavProps} />
         <Switch>

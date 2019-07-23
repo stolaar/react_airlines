@@ -1,0 +1,15 @@
+.panel {
+  width: 50%;
+  margin: 0 auto;
+}
+@media (max-width: 1000px) {
+  .panel {
+    width: 100%;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 990px) {
+  .panel {
+    width: 80%;
+  }
+}

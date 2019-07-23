@@ -3,7 +3,7 @@ import "./Stepper.css";
 
 function Stepper(props) {
   return (
-    <div className="progress align-items-center">
+    <div className="progress panel align-items-center">
       <div className="pl-2 pr-2 fa-stack fa-2x">
         <i className=" text-center fa fa-circle-o fa-stack-2x" />
         <div>

@@ -12,11 +12,17 @@ function Header(props) {
       <div className="content-bg">
         <div className="content ">
           <div className="text-center">
-            <h1 className="display-4">{props.heading}</h1>
+            <h1 className="display-5">WELCOME TO</h1>
+            <h2 className="display-7 text-white">
+              {props.heading}
+              <sub>.com</sub>
+            </h2>
             <Tabs />
             <Panel />
             <hr className="my-4" />
-            <Stepper />
+            <div className="pb-4">
+              <Stepper />
+            </div>
           </div>
         </div>
       </div>

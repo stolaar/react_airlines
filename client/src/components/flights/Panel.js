@@ -4,8 +4,8 @@ import "./Panel.css";
 function Panel(props) {
   return (
     <div
-      style={{ marginTop: "0", marginLeft: "0", padding: "20px 20px" }}
-      className="jumbotron bg-dark text-white"
+      style={{ marginTop: "0", marginBottom: "0", padding: "20px 20px" }}
+      className="jumbotron panel bg-dark text-white"
     >
       <div className="input-group">
         <div className="input-group-prepend">

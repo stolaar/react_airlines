@@ -1,29 +1,45 @@
 import React from "react";
 import "./Stepper.css";
+import { Link } from "react-router-dom";
 
 function Stepper(props) {
   return (
     <div className="progress panel align-items-center">
-      <div className="pl-2 pr-2 fa-stack fa-2x">
-        <i className=" text-center fa fa-circle-o fa-stack-2x" />
-        <div>
-          <i className="  text-center fas fa-plane-departure" />
+      <Link to="/services">
+        <div
+          style={{ cursor: "pointer", color: "#2E2E2E" }}
+          className="pl-2 pr-2 fa-stack fa-2x"
+        >
+          <i className=" text-center fa fa-circle-o fa-stack-2x" />
+          <div>
+            <i className="  text-center fas fa-plane-departure" />
+          </div>
         </div>
-      </div>
+      </Link>
       <div className="line-btw" />
-      <div className="pl-3 pr-3 fa-stack fa-2x text-center">
-        <i className="text-center fa fa-circle-o fa-stack-2x" />
-        <div>
-          <i className="text-center fas fa-concierge-bell" />
+      <Link to="/rent-a-car">
+        <div
+          style={{ cursor: "pointer", color: "#2E2E2E" }}
+          className="pl-3 pr-3 fa-stack fa-2x text-center"
+        >
+          <i className="text-center fa fa-circle-o fa-stack-2x" />
+          <div>
+            <i className="text-center fas fa-concierge-bell" />
+          </div>
         </div>
-      </div>
+      </Link>
       <div className="line-btw" />
-      <div className="pl-2 pr-2 fa-stack fa-2x text-center">
-        <i className="fa fa-circle-o fa-stack-2x" />
-        <div>
-          <i className="text-center fas fa-plane-arrival" />
+      <Link to="/book-a-hotel">
+        <div
+          style={{ cursor: "pointer", color: "#2E2E2E" }}
+          className="pl-2 pr-2 fa-stack fa-2x text-center"
+        >
+          <i className="fa fa-circle-o fa-stack-2x" />
+          <div>
+            <i className="text-center fas fa-plane-arrival" />
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

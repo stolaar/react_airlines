@@ -11,6 +11,9 @@ import Register from "./components/auth/Register";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser } from "./actions/authActions";
 import store from "./store";
+import ServicePage from "./components/pages/ServicePage/ServicePage";
+import RentCar from "./components/pages/RentCar/RentCar";
+import Book from "./components/pages/Book/Book";
 const headingLead = `This is a simple hero unit, a simple jumbotron-style component for
 calling extra attention to featured content or information.`;
 
@@ -52,6 +55,9 @@ function App(props) {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/services" component={ServicePage} />
+          <Route path="/rent-a-car" component={RentCar} />
+          <Route path="/book-a-hotel" component={Book} />
         </Switch>
       </div>
       <Footer />

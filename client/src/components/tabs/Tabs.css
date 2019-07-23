@@ -4,7 +4,17 @@
 }
 
 .tab-btn {
-  display: inline;
+  display: inline-block;
   position: relative;
   margin: 5px;
+}
+
+@media (max-width: 360px) {
+  .tab-btn .btn {
+    width: 5.7rem;
+    margin: 0;
+    font-size: 0.7rem;
+    padding-right: 2px 2px;
+    text-align: center;
+  }
 }

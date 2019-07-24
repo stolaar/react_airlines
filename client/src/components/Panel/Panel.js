@@ -4,14 +4,41 @@ import IconInput from "../common/IconInput";
 import { connect } from "react-redux";
 
 const inputs1 = [
-  { icon: "fas fa-plane-departure", placeholder: "From" },
-  { icon: "fas fa-plane-arrival", placeholder: "To" }
+  {
+    userInput: "",
+    icon: "fas fa-plane-departure",
+    placeholder: "From",
+    suggestion: false
+  },
+  {
+    userInput: "",
+    icon: "fas fa-plane-arrival",
+    placeholder: "To",
+    suggestion: false
+  }
 ];
 const inputs2 = [
-  { icon: "fas fa-plane-departure", placeholder: "Ticked ID" },
-  { icon: "fas fa-plane-arrival", placeholder: "Passport ID" }
+  {
+    userInput: "",
+    icon: "fas fa-plane-departure",
+    placeholder: "Ticked ID",
+    suggestion: false
+  },
+  {
+    userInput: "",
+    icon: "fas fa-plane-arrival",
+    placeholder: "Passport ID",
+    suggestion: false
+  }
 ];
-const inputs3 = [{ icon: "fas fa-plane-departure", placeholder: "Ticket ID" }];
+const inputs3 = [
+  {
+    userInput: "",
+    suggestion: false,
+    icon: "fas fa-plane-departure",
+    placeholder: "Ticket ID"
+  }
+];
 
 function Panel(props) {
   let activePanel = "";

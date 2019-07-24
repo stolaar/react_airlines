@@ -9,7 +9,7 @@ function Register(props) {
     name: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    password2: ""
   });
   const [errors, setErrors] = useState({});
 
@@ -27,7 +27,7 @@ function Register(props) {
       name: state.name,
       email: state.email,
       password: state.password,
-      confirmPassword: state.confirmPassword
+      password2: state.password2
     };
     props.register(userData, props.history);
   };
@@ -69,7 +69,7 @@ function Register(props) {
           <TextInput
             onChange={e => onChangeHandler(e)}
             id="password2"
-            name="confirmPassword"
+            name="password2"
             label="Confirm password"
             type="password"
             desc="password2"

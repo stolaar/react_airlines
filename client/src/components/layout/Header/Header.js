@@ -2,8 +2,8 @@ import React from "react";
 import "./Header.css";
 // import { FormattedMessage } from "react-intl";
 import Tabs from "../../tabs/Tabs";
-import Panel from "../../flights/Panel";
-import Stepper from "../../steps/Stepper";
+import Panel from "../../Panel/Panel";
+import Stepper from "../../BookingSteps/Stepper";
 
 function Header(props) {
   return (

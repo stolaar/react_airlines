@@ -15,38 +15,61 @@ const suggestions = [
 ];
 
 function IconInput(props) {
+  const [inputs, setInputs] = useState([...props.inputs]);
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [userInput, setUserInput] = useState("");
 
-  const onChange = e => {
-    const userInput = e.currentTarget.value;
+  const onChange = (e, index) => {
+    //const userInput = e.currentTarget.value;
 
     // Filter our suggestions that don't contain the user's input
     const filteredSuggestions = suggestions.filter(
       suggestion =>
-        suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+        suggestion
+          .toLowerCase()
+          .indexOf(inputs[index].userInput.toLowerCase()) > -1
     );
     setActiveSuggestion(0);
     setFilteredSuggestions(filteredSuggestions);
     setShowSuggestions(true);
-    setUserInput(e.currentTarget.value);
+    const updateInputs = [...inputs];
+    const inputItem = {
+      ...inputs[index],
+      suggestion: true,
+      userInput: e.currentTarget.value
+    };
+    updateInputs[index] = { ...inputItem };
+    setInputs([...updateInputs]);
   };
 
-  const onClick = e => {
+  const onClick = (e, index) => {
     setActiveSuggestion(0);
     setFilteredSuggestions([]);
     setShowSuggestions(false);
-    setUserInput(e.currentTarget.innerText);
+    const updateInputs = [...inputs];
+    const inputItem = {
+      ...inputs[index],
+      suggestion: false,
+      userInput: e.currentTarget.innerText
+    };
+    updateInputs[index] = { ...inputItem };
+    setInputs([...updateInputs]);
   };
 
-  const onKeyDown = e => {
+  const onKeyDown = (e, index) => {
     // User pressed the enter key
     if (e.keyCode === 13) {
       setActiveSuggestion(0);
       setShowSuggestions(false);
-      setUserInput(filteredSuggestions[activeSuggestion]);
+      const updateInputs = [...inputs];
+      const inputItem = {
+        ...inputs[index],
+        suggestion: false,
+        userInput: filteredSuggestions[activeSuggestion]
+      };
+      updateInputs[index] = { ...inputItem };
+      setInputs([...updateInputs]);
     }
     // User pressed the up arrow
     else if (e.keyCode === 38) {
@@ -64,40 +87,47 @@ function IconInput(props) {
     }
   };
 
-  let inputs = props.inputs.map((input, index) => {
+  let displayInputs = inputs.map((input, index) => {
     return (
       <React.Fragment key={index}>
-        <div className="input-group-prepend">
-          <span className="input-group-text" id="basic-addon1">
-            <i className={input.icon} />{" "}
-          </span>
+        <div className="input-group">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="basic-addon1">
+              <i className={input.icon} />{" "}
+            </span>
+          </div>
+          <input
+            onChange={e => onChange(e, index)}
+            onKeyDown={e => onKeyDown(e, index)}
+            type="text"
+            value={input.userInput}
+            className="form-control"
+            placeholder={input.placeholder}
+          />
         </div>
-        <input
-          onChange={e => onChange(e)}
-          onKeyDown={e => onKeyDown(e)}
-          type="text"
-          className="form-control"
-          placeholder={input.placeholder}
-        />
-        <Suggestions
-          showSuggestions={showSuggestions}
-          userInput={userInput}
-          filteredSuggestions={filteredSuggestions}
-          activeSuggestion={activeSuggestion}
-          onClick={e => onClick(e)}
-        />
+        {input.suggestion ? (
+          <Suggestions
+            showSuggestions={showSuggestions}
+            userInput={input.userInput}
+            filteredSuggestions={filteredSuggestions}
+            activeSuggestion={activeSuggestion}
+            onClick={e => onClick(e, index)}
+          />
+        ) : (
+          ""
+        )}
         <span className="input-group-addon">&nbsp;</span>
       </React.Fragment>
     );
   });
   return (
-    <div className="input-group">
-      {inputs}
-      <button className="btn btn-danger">
+    <React.Fragment>
+      {displayInputs}
+      <button style={{ width: "100%" }} className="btn btn-danger">
         {" "}
         <i className="fas fa-chevron-right" />
       </button>
-    </div>
+    </React.Fragment>
   );
 }
 export default IconInput;

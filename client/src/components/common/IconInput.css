@@ -4,25 +4,47 @@
 }
 
 .suggestions {
-  border: 1px solid #999;
+  border: none;
   display: block;
-  border-top-width: 0;
   list-style: none;
   z-index: 900;
   margin-top: 0;
+  border-radius: 4px;
   max-height: 143px;
   overflow-y: auto;
-  padding-left: 0;
-  width: auto !important;
+  padding-left: 45.97px;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .suggestions li {
   padding: 0.5rem;
+  text-align: left;
+  color: white;
+  background-color: transparent;
 }
 
 .suggestion-active,
 .suggestions li:hover {
-  background-color: white;
+  background-color: #d3d3d3;
   color: black;
   cursor: pointer;
   font-weight: 700;

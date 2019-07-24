@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Suggestions from "../common/Suggestions";
 import "./IconInput.css";
 const suggestions = [
-  "Alligator",
-  "Bask",
-  "Crocodilian",
-  "Death Roll",
-  "Eggs",
-  "Jaws",
-  "Reptile",
-  "Solitary",
-  "Tail",
-  "Wetlands"
+  "North of Macedonia",
+  "Bosnia",
+  "Albania",
+  "Portugal",
+  "Slovenia",
+  "Hungary",
+  "Denmark",
+  "Sweden",
+  "Germany",
+  "Poland"
 ];
 
 function IconInput(props) {

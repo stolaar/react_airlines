@@ -77,7 +77,10 @@ router.post("/login", (req, res) => {
           });
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        errors.password = "Network error!";
+        res.status(400).send(errors);
+      });
   }
 });
 

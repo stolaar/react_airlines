@@ -14,6 +14,7 @@ import store from "./store";
 import ServicePage from "./components/pages/ServicePage/ServicePage";
 import RentCar from "./components/pages/RentCar/RentCar";
 import Book from "./components/pages/Book/Book";
+import Admin from "./components/pages/Admin/Admin";
 const headingLead = `This is a simple hero unit, a simple jumbotron-style component for
 calling extra attention to featured content or information.`;
 
@@ -53,11 +54,12 @@ function App(props) {
       <div className="container">
         <Navigation linkId="navbarSub" borderRadius={"7px"} {...subNavProps} />
         <Switch>
+          <Route path="/" exact component={ServicePage} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/services" component={ServicePage} />
           <Route path="/rent-a-car" component={RentCar} />
           <Route path="/book-a-hotel" component={Book} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </div>
       <Footer />

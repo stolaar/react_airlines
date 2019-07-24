@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import TabButton from "./TabButton";
 import "./Tabs.css";
+import { connect } from "react-redux";
+import { setPanel } from "../../actions/tabsActions";
 
 function Tabs(props) {
   const [buttons, setButtons] = useState([
-    { title: "Book a flight", isActive: true },
-    { title: "Check-in", isActive: false },
-    { title: "Flight Status", isActive: false }
+    { title: "Book a flight", name: "Panel1", isActive: true },
+    { title: "Check-in", name: "Panel2", isActive: false },
+    { title: "Flight Status", name: "Panel3", isActive: false }
   ]);
   const setButtonsHandler = index => {
     const btn = {
@@ -17,6 +19,7 @@ function Tabs(props) {
     newBtns.forEach(btn => (btn.isActive = false));
     newBtns[index] = btn;
     setButtons([...newBtns]);
+    props.setPanel(btn.name);
   };
   return (
     <ul className="tabs">
@@ -33,4 +36,7 @@ function Tabs(props) {
     </ul>
   );
 }
-export default Tabs;
+export default connect(
+  null,
+  { setPanel }
+)(Tabs);

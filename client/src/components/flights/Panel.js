@@ -3,32 +3,21 @@ import "./Panel.css";
 import IconInput from "../common/IconInput";
 import { connect } from "react-redux";
 
+const inputs1 = [
+  { icon: "fas fa-plane-departure", placeholder: "From" },
+  { icon: "fas fa-plane-arrival", placeholder: "To" }
+];
+const inputs2 = [
+  { icon: "fas fa-plane-departure", placeholder: "Ticked ID" },
+  { icon: "fas fa-plane-arrival", placeholder: "Passport ID" }
+];
+const inputs3 = [{ icon: "fas fa-plane-departure", placeholder: "Ticket ID" }];
+
 function Panel(props) {
   let activePanel = "";
-  let panel1 = (
-    <IconInput
-      leftIcon="fas fa-plane-departure"
-      leftPlaceholder="From"
-      rightIcon="fas fa-plane-arrival"
-      rightPlaceholder="To"
-    />
-  );
-  let panel2 = (
-    <IconInput
-      leftIcon="fas fa-plane-departure"
-      leftPlaceholder="Ticket ID"
-      rightIcon="fas fa-plane-arrival"
-      rightPlaceholder="Credentials"
-    />
-  );
-  let panel3 = (
-    <IconInput
-      leftIcon="fas fa-plane-departure"
-      leftPlaceholder="Ticket ID"
-      rightIcon="fas fa-plane-arrival"
-      rightPlaceholder="To"
-    />
-  );
+  let panel1 = <IconInput inputs={[...inputs1]} />;
+  let panel2 = <IconInput inputs={[...inputs2]} />;
+  let panel3 = <IconInput inputs={[...inputs3]} />;
   switch (props.tabs.panel) {
     case "Panel1":
       activePanel = panel1;

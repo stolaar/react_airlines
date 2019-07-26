@@ -4,7 +4,26 @@ import jwt_decode from "jwt-decode";
 import { SET_CURRENT_USER, GET_ERRORS } from "./types";
 
 export const loginUser = userData => dispatch => {
+  const { email, password } = userData;
+  let queryData = {
+    query: `
+    query {
+      login(email: "${email}", password: "${password}") {
+        email
+    }
+    `
+  };
+  const options = {
+    headers: { "Content-Type": "application/json" }
+  };
   axios
+    .post("/graphql", queryData, options)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.log(err));
+
+  /* axios
     .post("/api/users/login", userData)
     .then(res => {
       console.log(res);
@@ -16,7 +35,7 @@ export const loginUser = userData => dispatch => {
     })
     .catch(err =>
       dispatch({ type: GET_ERRORS, payload: { ...err.response.data } })
-    );
+    ); */
 };
 
 export const register = (newData, history) => dispatch => {

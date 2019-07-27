@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Suggestions from "../common/Suggestions";
 import "./IconInput.css";
 const suggestions = [
@@ -19,11 +19,11 @@ function IconInput(props) {
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  useEffect(() => {
+    setInputs([...props.inputs]);
+  }, [props]);
 
   const onChange = (e, index) => {
-    //const userInput = e.currentTarget.value;
-
-    // Filter our suggestions that don't contain the user's input
     const filteredSuggestions = suggestions.filter(
       suggestion =>
         suggestion

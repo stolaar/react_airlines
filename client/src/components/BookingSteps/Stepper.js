@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Stepper(props) {
   return (
     <div className="progress panel align-items-center">
-      <Link to="/services">
+      <Link to="/">
         <div
           style={{ cursor: "pointer", color: "#2E2E2E" }}
           className="pl-2 pr-2 fa-stack fa-2x"

@@ -11,6 +11,7 @@ function Register(props) {
     password: "",
     password2: ""
   });
+  const [confirmedTC, setConfirmed] = useState(false);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -21,6 +22,11 @@ function Register(props) {
     e.preventDefault();
     setState({ ...state, [e.target.name]: e.target.value });
   };
+
+  const checkedTC = () => {
+    setConfirmed(!confirmedTC);
+  };
+
   const onSubmitHandler = e => {
     e.preventDefault();
     const userData = {
@@ -82,12 +88,17 @@ function Register(props) {
               type="checkbox"
               className="form-check-input"
               id="exampleCheck1"
+              onChange={() => checkedTC()}
             />
             <label className="form-check-label" htmlFor="exampleCheck1">
               I agree with the <a href="/register">Terms and conditions</a>
             </label>
           </div>
-          <button type="submit" className="mt-2 btn btn-primary">
+          <button
+            disabled={!confirmedTC}
+            type="submit"
+            className="mt-2 btn btn-primary"
+          >
             Submit
           </button>
         </form>

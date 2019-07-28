@@ -8,6 +8,7 @@ type User {
     password: String
 }
 type AuthData {
+<<<<<<< HEAD
     success: Boolean
     token: String
 }
@@ -19,6 +20,11 @@ type Errors {
 type LoginResponse {
     response: AuthData
     errors: Errors
+=======
+    userId: ID!
+    token: String!
+    exp: Int!
+>>>>>>> ba0c53f8ef58b00261b634668abc35ce9433d56d
 }
 input UserInput {
     name: String!
@@ -28,7 +34,11 @@ input UserInput {
 }
 
 type rootQuery {
+<<<<<<< HEAD
     login(email: String!, password: String!): LoginResponse!
+=======
+    login(email: String!, password: String!): AuthData!
+>>>>>>> ba0c53f8ef58b00261b634668abc35ce9433d56d
 }
 
 type rootMutation {

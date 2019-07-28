@@ -1,26 +1,40 @@
 import React, { useState, useEffect } from "react";
-import Suggestions from "../common/Suggestions";
 import "./IconInput.css";
-const suggestions = [
-  "North of Macedonia",
-  "Bosnia",
-  "Albania",
-  "Portugal",
-  "Slovenia",
-  "Hungary",
-  "Denmark",
-  "Sweden",
-  "Germany",
-  "Poland"
-];
+import Suggestions from "./Suggestions";
 
 function IconInput(props) {
   const [inputs, setInputs] = useState([...props.inputs]);
+  const [suggestions, setSuggestions] = useState([]);
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   useEffect(() => {
     setInputs([...props.inputs]);
+    props.inputs.forEach(input => {
+      let newSuggestion;
+      if (
+        input.placeholder === "Ticket ID" ||
+        input.placeholder === "Passport ID"
+      ) {
+        newSuggestion = [];
+        setSuggestions([...newSuggestion]);
+      }
+      if (input.placeholder === "From" || input.placeholder === "To") {
+        newSuggestion = [
+          "North of Macedonia",
+          "Bosnia",
+          "Albania",
+          "Portugal",
+          "Slovenia",
+          "Hungary",
+          "Denmark",
+          "Sweden",
+          "Germany",
+          "Poland"
+        ];
+        setSuggestions([...newSuggestion]);
+      }
+    });
   }, [props]);
 
   const onChange = (e, index) => {
@@ -105,7 +119,7 @@ function IconInput(props) {
             placeholder={input.placeholder}
           />
         </div>
-        {input.suggestion ? (
+        {input.suggestion && input.hasSuggestion ? (
           <Suggestions
             showSuggestions={showSuggestions}
             userInput={input.userInput}

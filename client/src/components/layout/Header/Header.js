@@ -12,10 +12,9 @@ function Header(props) {
       <div className="content-bg">
         <div className="content ">
           <div className="text-center">
-            <h1 className="display-5">WELCOME TO</h1>
-            <h2 className="display-7 text-white">
-              {props.heading}
-              <sub>.com</sub>
+            <h2 className="welcome">WELCOME TO</h2>
+            <h2 className="brand display-7">
+              <strong> {props.heading} </strong>
             </h2>
             <Tabs />
             <Panel />

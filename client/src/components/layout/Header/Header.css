@@ -3,6 +3,18 @@
   position: relative;
   background: none;
 }
+.welcome {
+  font-size: 100;
+  font-weight: 100;
+  color: #d3d3d3;
+}
+.brand {
+  font-size: 100;
+  font-weight: 100;
+  text-shadow: black;
+  color: white;
+  -webkit-text-stroke: black;
+}
 
 .jumbotron .bg {
   position: absolute;

@@ -3,51 +3,35 @@ const jwt = require("jsonwebtoken");
 const secret = require("../../config/keys").secretOrKey;
 const validateLogin = require("../../validation/login");
 const User = require("../../models/user");
-
 module.exports = {
-  login: ({ email, password }) => {
-    const user = { email, password };
-    const { errors, isValid } = validateLogin(user);
+  login: async ({ email, password }) => {
+    const userData = { email, password };
+    const { errors, isValid } = validateLogin(userData);
     if (!isValid) {
-      throw new Error("Username or password are incorrect");
-      //res.status(400).send(errors);
-    } else {
-      User.findOne({ email: req.body.email })
-        .then(user => {
-          if (!user) {
-            errors.email = "User not found";
-            throw new Error("User not found");
-            //res.status(400).send(errors);
-          } else {
-            bcrypt.compare(req.body.password, user.password).then(isMatch => {
-              if (isMatch) {
-                const payload = {
-                  id: user._id,
-                  name: user.name
-                };
-                jwt.sign(
-                  payload,
-                  secret,
-                  { expiresIn: 36000 },
-                  (err, token) => {
-                    if (err) {
-                      throw new Error("Error signing token");
-                    }
-                    return {
-                      success: true,
-                      token: `Bearer ${token}`
-                    };
-                  }
-                );
-              }
-            });
-          }
-        })
-        .catch(err => {
-          errors.password = "Network error!";
-          throw new Error("Network error!");
-          //res.status(400).send(errors);
-        });
+      throw new Error({ ...errors });
     }
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        errors.email = "User not found";
+        throw new Error(errors);
+      }
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        const payload = {
+          id: user.id,
+          name: user.name
+        };
+        let tokenResult;
+        const token = jwt.sign(payload, secret, { expiresIn: 36000 });
+        return { success: "True", token: `Bearer ${token}` };
+        //dd
+      }
+    } catch (e) {
+      throw new Error("Network error!");
+    }
+  },
+  getUsers: () => {
+    return { success: "True" };
   }
 };

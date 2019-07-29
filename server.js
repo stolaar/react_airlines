@@ -9,7 +9,7 @@ const PORT = 5000;
 const rootSchema = require("./graphql/schema/index");
 const rootResolvers = require("./graphql/resolvers/index");
 
-app.disable("x-powered-by");
+app.disable("X-Powered-By");
 app.use(function(req, res, next) {
   res.setHeader("Airlineser", "powered by Stola");
   next();
@@ -28,9 +28,12 @@ require("./config/passport")(passport);
 //app.use("/api/users", users);
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Contro-Origin-Allow", "*");
-  res.setHeader("Access-Contro-Origin-Methods", "POST,GET,OPTIONS");
-  res.setHeader("Access-Contro-Origin-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, Content-Length, X-Requested-With, X-powered-by, Airlineser"
+  );
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }

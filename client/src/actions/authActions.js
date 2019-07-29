@@ -17,7 +17,7 @@ export const loginUser = userData => dispatch => {
     headers: { "Content-Type": "application/json" }
   };
   axios
-    .post("/graphql", queryData, options)
+    .post("http://localhost:5000/graphql", queryData, options)
     .then(res => {
       console.log(res);
     })

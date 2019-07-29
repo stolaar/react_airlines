@@ -1,40 +1,59 @@
-import axios from "axios";
+// import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { SET_CURRENT_USER, GET_ERRORS } from "./types";
+import { loginData, registerData } from "../helpers/queryData";
 
-export const loginUser = userData => dispatch => {
-  const { email, password } = userData;
-  console.log(typeof email);
-  let queryData = {
-    query: `
-    query {
-      login(email: "${email}", password: "${password}") {
-        success
-        token
+export const loginUser = userData => async dispatch => {
+  try {
+    const result = await fetch("http://localhost:5000/graphql", {
+      method: "POST",
+      body: JSON.stringify(loginData(userData)),
+      headers: {
+        "Content-Type": "application/json"
       }
+    });
+    const resData = await result.json();
+    console.log(resData);
+    if (resData.data.login.data) {
+      const { token } = resData.data.login.data;
+      localStorage.setItem("jwtToken", token);
+      setAuthToken(token);
+      const decoded = jwt_decode(token);
+      dispatch(setCurrentUser(decoded));
+    } else {
+      dispatch({
+        type: GET_ERRORS,
+        payload: { ...resData.data.login.errors }
+      });
     }
-    `
-  };
-  const options = {
-    headers: { "Content-Type": "application/json" }
-  };
-  fetch("http://localhost:5000/graphql", {
-    method: "POST",
-    body: JSON.stringify(queryData),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-    .then(res => console.log(res.json()))
-    .catch(e => console.log(e));
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-export const register = (newData, history) => dispatch => {
-  axios
-    .post("/api/users/register", newData)
-    .then(res => history.push("/login"))
-    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+export const register = (newData, history) => async dispatch => {
+  try {
+    const result = await fetch("http://localhost:5000/graphql", {
+      method: "POST",
+      body: JSON.stringify(registerData(newData)),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const resData = await result.json();
+    console.log(resData.data);
+    if (resData.data.register.success) {
+      history.push("/login");
+    } else {
+      dispatch({
+        type: GET_ERRORS,
+        payload: { ...resData.data.register.errors }
+      });
+    }
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const setCurrentUser = decoded => {

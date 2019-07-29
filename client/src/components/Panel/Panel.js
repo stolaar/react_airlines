@@ -8,13 +8,15 @@ const inputs1 = [
     userInput: "",
     icon: "fas fa-plane-departure",
     placeholder: "From",
-    suggestion: false
+    suggestion: false,
+    hasSuggestion: true
   },
   {
     userInput: "",
     icon: "fas fa-plane-arrival",
     placeholder: "To",
-    suggestion: false
+    suggestion: false,
+    hasSuggestion: true
   }
 ];
 const inputs2 = [
@@ -22,13 +24,15 @@ const inputs2 = [
     userInput: "",
     icon: "fas fa-plane-departure",
     placeholder: "Ticked ID",
-    suggestion: false
+    suggestion: false,
+    hasSuggestion: false
   },
   {
     userInput: "",
     icon: "fas fa-plane-arrival",
     placeholder: "Passport ID",
-    suggestion: false
+    suggestion: false,
+    hasSuggestion: false
   }
 ];
 const inputs3 = [
@@ -36,7 +40,8 @@ const inputs3 = [
     userInput: "",
     suggestion: false,
     icon: "fas fa-plane-departure",
-    placeholder: "Ticket ID"
+    placeholder: "Ticket ID",
+    hasSuggestion: false
   }
 ];
 

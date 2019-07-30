@@ -1,8 +1,8 @@
 import React from "react";
-import "./Stepper.css";
+import "./PageTabs.css";
 import { Link } from "react-router-dom";
 
-function Stepper() {
+function PageTabs() {
   return (
     <div className="progress panel align-items-center">
       <Link to="/">
@@ -44,4 +44,4 @@ function Stepper() {
   );
 }
 
-export default Stepper;
+export default PageTabs;

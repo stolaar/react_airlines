@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TabButton from "./TabButton";
 import "./Tabs.css";
 import { connect } from "react-redux";
-import { setPanel } from "../../actions/tabsActions";
+import { setPanel } from "../../../actions/tabsActions";
 import PropTypes from "prop-types";
 
 function Tabs(props) {

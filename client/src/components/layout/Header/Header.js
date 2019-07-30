@@ -1,9 +1,9 @@
 import React from "react";
 import "./Header.css";
 // import { FormattedMessage } from "react-intl";
-import Tabs from "../../tabs/Tabs";
+import PanelTabs from "../../Panel/PanelTabs/Tabs";
 import Panel from "../../Panel/Panel";
-import Stepper from "../../BookingSteps/Stepper";
+import PageTabs from "../../PageTabs/PageTabs";
 import PropTypes from "prop-types";
 
 function Header(props) {
@@ -17,11 +17,11 @@ function Header(props) {
             <h2 className="brand display-7">
               <strong> {props.heading} </strong>
             </h2>
-            <Tabs />
+            <PanelTabs />
             <Panel />
             <hr className="my-4" />
             <div className="pb-4">
-              <Stepper />
+              <PageTabs />
             </div>
           </div>
         </div>

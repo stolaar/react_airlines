@@ -1,0 +1,20 @@
+.app-card-list {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.card-item {
+  flex: 0 1 90%;
+}
+
+@media (max-width: 800px) {
+  .app-card-list {
+    flex-direction: column;
+  }
+  .card-item {
+    display: block;
+    width: 100vw;
+    margin: 20px 20px;
+  }
+}

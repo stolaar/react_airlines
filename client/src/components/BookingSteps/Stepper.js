@@ -2,7 +2,7 @@ import React from "react";
 import "./Stepper.css";
 import { Link } from "react-router-dom";
 
-function Stepper(props) {
+function Stepper() {
   return (
     <div className="progress panel align-items-center">
       <Link to="/">

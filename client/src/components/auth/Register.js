@@ -3,6 +3,7 @@ import TextInput from "./../common/TextInput";
 import { connect } from "react-redux";
 import { register } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function Register(props) {
   const [state, setState] = useState({
@@ -112,6 +113,13 @@ const mapStateToProps = ({ lang, errors }) => ({ lang, errors });
 const mapDispatchToProps = dispatch => ({
   register: (data, history) => dispatch(register(data, history))
 });
+
+Register.propTypes = {
+  lang: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  register: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 export default connect(
   mapStateToProps,

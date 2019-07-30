@@ -3,6 +3,7 @@ import TabButton from "./TabButton";
 import "./Tabs.css";
 import { connect } from "react-redux";
 import { setPanel } from "../../actions/tabsActions";
+import PropTypes from "prop-types";
 
 function Tabs(props) {
   const [buttons, setButtons] = useState([
@@ -36,6 +37,10 @@ function Tabs(props) {
     </ul>
   );
 }
+
+Tabs.propTypes = {
+  setPanel: PropTypes.func.isRequired
+};
 export default connect(
   null,
   { setPanel }

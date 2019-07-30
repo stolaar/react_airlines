@@ -4,6 +4,7 @@ import "./Header.css";
 import Tabs from "../../tabs/Tabs";
 import Panel from "../../Panel/Panel";
 import Stepper from "../../BookingSteps/Stepper";
+import PropTypes from "prop-types";
 
 function Header(props) {
   return (
@@ -28,5 +29,9 @@ function Header(props) {
     </div>
   );
 }
+
+Header.propTypes = {
+  heading: PropTypes.string.isRequired
+};
 
 export default Header;

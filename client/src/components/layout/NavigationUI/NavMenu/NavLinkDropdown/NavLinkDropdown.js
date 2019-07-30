@@ -1,5 +1,6 @@
 import React from "react";
 import NavLink from "./../NavLink/NavLink";
+import PropTypes from "prop-types";
 
 const NavLinkDropdown = props => {
   let active = false;
@@ -32,6 +33,11 @@ const NavLinkDropdown = props => {
       <ul className="bg-dark dropdown-menu">{links}</ul>
     </li>
   );
+};
+
+NavLinkDropdown.propTypes = {
+  links: PropTypes.array.isRequired,
+  text: PropTypes.string.isRequired
 };
 
 export default NavLinkDropdown;

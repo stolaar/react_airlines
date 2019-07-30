@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./IconInput.css";
 import Suggestions from "./Suggestions";
+import PropTypes from "prop-types";
 
 function IconInput(props) {
   const [inputs, setInputs] = useState([...props.inputs]);
@@ -144,6 +145,11 @@ function IconInput(props) {
     </React.Fragment>
   );
 }
+
+IconInput.propTypes = {
+  inputs: PropTypes.array.isRequired
+};
+
 export default IconInput;
 // fas fa-plane-departure
 //"fas fa-plane-arrival"

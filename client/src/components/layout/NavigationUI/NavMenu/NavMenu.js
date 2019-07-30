@@ -5,6 +5,7 @@ import "./NavMenu.css";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../../actions/authActions";
 import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const NavMenu = props => {
   const [showMenu, setShowMenu] = useState(false);
@@ -91,6 +92,12 @@ const mapStateToProps = ({ auth }) => ({ auth });
 const mapDispatchToProps = dispatch => ({
   logoutUser: history => dispatch(logoutUser(history))
 });
+
+NavMenu.propTypes = {
+  links: PropTypes.array,
+  auth: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired
+};
 
 export default connect(
   mapStateToProps,

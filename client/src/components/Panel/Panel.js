@@ -2,6 +2,7 @@ import React from "react";
 import "./Panel.css";
 import IconInput from "../common/IconInput";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const inputs1 = [
   {
@@ -75,5 +76,8 @@ function Panel(props) {
 }
 
 const mapStateToProps = ({ tabs }) => ({ tabs });
+Panel.propTypes = {
+  tabs: PropTypes.object
+};
 
 export default connect(mapStateToProps)(Panel);

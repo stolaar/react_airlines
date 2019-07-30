@@ -2,6 +2,7 @@ import React from "react";
 import "./Footer.css";
 import { connect } from "react-redux";
 import { changeLanguage } from "../../../actions/languageActions";
+import PropTypes from "prop-types";
 
 function Footer(props) {
   const changeLanguageHandler = (e, lang) => {
@@ -74,6 +75,10 @@ function Footer(props) {
     </footer>
   );
 }
+
+Footer.propTypes = {
+  changeLanguage: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = dispatch => ({
   changeLanguage: lang => dispatch(changeLanguage(lang))

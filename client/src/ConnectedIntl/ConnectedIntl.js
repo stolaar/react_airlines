@@ -9,6 +9,7 @@ import messages_en from "../translations/en.json";
 import messages_mk from "../translations/mk.json";
 import messages_sq from "../translations/sq.json";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const messages = {
   en: messages_en,
@@ -26,4 +27,9 @@ function ConnectedIntl(props) {
 }
 
 const mapStateToProps = ({ lang }) => ({ lang });
+
+ConnectedIntl.propTypes = {
+  lang: PropTypes.object.isRequired
+};
+
 export default connect(mapStateToProps)(ConnectedIntl);

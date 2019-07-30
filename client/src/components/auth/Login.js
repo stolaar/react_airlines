@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 import TextInput from "./../common/TextInput";
+import PropTypes from "prop-types";
 
 function Login(props) {
   const [state, setState] = useState({
@@ -64,6 +65,13 @@ function Login(props) {
     </div>
   );
 }
+
+Login.propTypes = {
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 const mapStateToProps = ({ auth, errors }) => ({
   auth,

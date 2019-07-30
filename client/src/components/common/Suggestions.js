@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 
 function Suggestions(props) {
   let suggestionsListComponent;
@@ -37,5 +38,12 @@ function Suggestions(props) {
 
   return <Fragment>{suggestionsListComponent}</Fragment>;
 }
+Suggestions.propTypes = {
+  showSuggestions: PropTypes.bool.isRequired,
+  userInput: PropTypes.string.isRequired,
+  filteredSuggestions: PropTypes.array.isRequired,
+  activeSuggestion: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired
+};
 
 export default Suggestions;

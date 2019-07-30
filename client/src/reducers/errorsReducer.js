@@ -1,21 +1,11 @@
 import { GET_ERRORS } from "./../actions/types";
 
-const initialState = {
-  errors: {}
-};
-
-export default (state = initialState, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case GET_ERRORS:
-      return {
-        ...state,
-        errors: { ...action.payload }
-      };
+      return action.payload;
 
     default:
-      return {
-        ...state,
-        errors: {}
-      };
+      return {};
   }
 };

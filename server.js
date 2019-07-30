@@ -8,7 +8,6 @@ const graphqlHttp = require("express-graphql");
 const PORT = 5000;
 const rootSchema = require("./graphql/schema/index");
 const rootResolvers = require("./graphql/resolvers/index");
-const cors = require("cors");
 
 app.disable("X-Powered-By");
 app.use(function(req, res, next) {

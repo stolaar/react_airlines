@@ -15,7 +15,7 @@ function Login(props) {
     props.auth.isAuthenticated && props.history.push("/");
   }, [props.auth, props.history]);
   useEffect(() => {
-    setErrors({ ...props.errors.errors });
+    setErrors({ ...props.errors });
   }, [props.errors]);
   const onChangeHandler = e => {
     e.preventDefault();

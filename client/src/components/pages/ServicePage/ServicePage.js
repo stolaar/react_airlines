@@ -34,7 +34,7 @@ function ServicePage(props) {
   return (
     <div className="row p-4 mx-auto justify-content-center align-items-center text-center">
       <div className="col-md-12">
-        <h2>Services</h2>
+        <h2 className="p-4">Services</h2>
         <div className="app-card-list">
           {Object.keys(posts).map(key => (
             <Card

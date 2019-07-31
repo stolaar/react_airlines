@@ -1,20 +1,21 @@
 .app-card-list {
-  justify-content: space-between;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   flex-wrap: nowrap;
 }
 .card-item {
-  flex: 0 1 90%;
+  display: block;
+  width: 330px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 990px) {
   .app-card-list {
     flex-direction: column;
   }
   .card-item {
     display: block;
-    width: 100vw;
+    width: 100%;
     margin: 20px 20px;
   }
 }

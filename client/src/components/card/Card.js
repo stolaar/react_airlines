@@ -19,22 +19,28 @@ const useStyles = makeStyles({
 
 export default function MediaCard(props) {
   const classes = useStyles();
+  const cardBody = {
+    height: "150px",
+    color: "black"
+  };
 
   return (
     <div className="card-item">
-      <Card className={classes.card}>
+      <Card className={classes.cardBody}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
             image={props.image}
             title="Contemplative Reptile"
+            component="img"
           />
-          <CardContent>
+          <CardContent style={cardBody}>
             <Typography gutterBottom variant="h5" component="h2">
               {props.heading}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Some text
+            <Typography variant="body2" color="textPrimary" component="p">
+              Lizards are a widespread group of squamate reptiles, with over
+              6,000 species, ranging across all continents except Antarctica
             </Typography>
           </CardContent>
         </CardActionArea>

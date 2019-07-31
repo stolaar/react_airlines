@@ -1,0 +1,44 @@
+.app-card-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.card-item {
+  display: block;
+  width: 330px;
+}
+
+@media (max-width: 990px) {
+  .app-card-list {
+    flex-direction: column;
+  }
+  .card-item {
+    display: block;
+    width: 100%;
+    margin: 20px 20px;
+  }
+}
+
+.service {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: black !important;
+  padding: 20px;
+  justify-content: space-between;
+}
+.service-image {
+  flex: 0 1 15rem;
+  padding-right: 15px;
+}
+.service-image img {
+  border-radius: 7px;
+}
+
+.service-content {
+  flex: 2;
+}
+.service-content p {
+  color: black !important;
+}

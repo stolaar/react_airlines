@@ -20,8 +20,8 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
   const cardBody = {
-    height: "150px",
-    color: "black"
+    height: "fit-content",
+    color: "black !important"
   };
 
   return (
@@ -38,18 +38,19 @@ export default function MediaCard(props) {
             <Typography gutterBottom variant="h5" component="h2">
               {props.heading}
             </Typography>
-            <Typography variant="body2" color="textPrimary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+            <Typography variant="body2" color="textPrimary" component="span">
+              {props.description}
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button size="small" color="inherit">
-            Share
-          </Button>
-          <Button size="small" color="inherit">
-            Learn More
+        <CardActions style={{ padding: "15px" }}>
+          <Button
+            onClick={props.onClick}
+            size="small"
+            variant="outlined"
+            color="inherit"
+          >
+            See More
           </Button>
         </CardActions>
       </Card>

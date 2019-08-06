@@ -16,7 +16,7 @@ function Register(props) {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    setErrors({ ...props.errors.errors });
+    setErrors({ ...props.errors });
   }, [props.errors]);
 
   const onChangeHandler = e => {

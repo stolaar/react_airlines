@@ -13,6 +13,10 @@ const UserSchema = new Schema({
   password: {
     type: String,
     isRequired: true
+  },
+  passportID: {
+    type: String,
+    isRequired: false
   }
 });
 

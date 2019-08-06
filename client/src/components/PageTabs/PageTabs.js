@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function PageTabs() {
   return (
-    <div className="progress panel align-items-center">
+    <div className="progress panel p-4 align-items-center">
       <Link to="/">
         <div
           style={{ cursor: "pointer", color: "#2E2E2E" }}

@@ -1,6 +1,7 @@
 footer {
   min-height: 20vh;
   z-index: 100;
+  user-select: none;
 }
 
 .lang-btn {

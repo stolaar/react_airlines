@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import TextInput from "./../common/TextInput";
 import { connect } from "react-redux";
 import { register } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import "./Register.css";
 
 function Register(props) {
   const [state, setState] = useState({
@@ -14,9 +15,10 @@ function Register(props) {
   });
   const [confirmedTC, setConfirmed] = useState(false);
   const [errors, setErrors] = useState({});
-
+  const [showTerms, setShowTerms] = useState(false);
+  const termsRef = useRef();
   useEffect(() => {
-    setErrors({ ...props.errors.errors });
+    setErrors({ ...props.errors });
   }, [props.errors]);
 
   const onChangeHandler = e => {
@@ -26,6 +28,11 @@ function Register(props) {
 
   const checkedTC = () => {
     setConfirmed(!confirmedTC);
+  };
+
+  const onTermsAndConditionsClick = () => {
+    setShowTerms(!showTerms);
+    termsRef.current.scrollIntoView(true);
   };
 
   const onSubmitHandler = e => {
@@ -92,7 +99,13 @@ function Register(props) {
               onChange={() => checkedTC()}
             />
             <label className="form-check-label" htmlFor="exampleCheck1">
-              I agree with the <a href="/register">Terms and conditions</a>
+              I agree with the{" "}
+              <button
+                className="terms-btn"
+                onClick={() => onTermsAndConditionsClick()}
+              >
+                Terms and conditions
+              </button>
             </label>
           </div>
           <button
@@ -103,6 +116,26 @@ function Register(props) {
             Submit
           </button>
         </form>
+        <div className="terms" ref={termsRef}>
+          {showTerms && (
+            <Fragment>
+              <hr />
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum.
+              </p>
+              <hr />
+            </Fragment>
+          )}
+        </div>
       </div>
     </div>
   );

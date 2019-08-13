@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Panel.css";
 import IconInput from "../common/IconInput";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const inputs1 = [
   {
@@ -47,8 +48,26 @@ const inputs3 = [
 ];
 
 function Panel(props) {
+  useEffect(() => {
+    props.auth.isAuthenticated && setUser(true);
+    !props.auth.isAuthenticated && setUser(false);
+  }, [props.auth]);
+
+  const onClickHandler = () => {
+    user ? setError(false) && props.history.push("/services") : setError(true);
+    user && window.scrollTo(0, 800);
+  };
+
+  useEffect(() => {
+    setError(false);
+  }, [props.tabs.panel]);
+
   let activePanel = "";
-  let panel1 = <IconInput inputs={[...inputs1]} />;
+  const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+  let panel1 = (
+    <IconInput onClick={() => onClickHandler()} inputs={[...inputs1]} />
+  );
   let panel2 = <IconInput inputs={[...inputs2]} />;
   let panel3 = <IconInput inputs={[...inputs3]} />;
   switch (props.tabs.panel) {
@@ -71,11 +90,22 @@ function Panel(props) {
       className="jumbotron panel bg-dark text-white"
     >
       {activePanel}
+      {error && (
+        <div className="pt-4">
+          <p>
+            You have to{" "}
+            <Link onClick={() => window.scrollTo(0, 800)} to="/login">
+              Login
+            </Link>{" "}
+            first
+          </p>
+        </div>
+      )}
     </div>
   );
 }
 
-const mapStateToProps = ({ tabs }) => ({ tabs });
+const mapStateToProps = ({ tabs, auth }) => ({ tabs, auth });
 Panel.propTypes = {
   tabs: PropTypes.object
 };

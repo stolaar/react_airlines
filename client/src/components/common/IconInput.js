@@ -138,7 +138,7 @@ function IconInput(props) {
   return (
     <React.Fragment>
       {displayInputs}
-      <button style={{ width: "100%" }} className="btn btn-danger">
+      <button onClick={props.onClick} style={{ width: "100%" }} className="btn btn-danger">
         {" "}
         <i className="fas fa-chevron-right" />
       </button>

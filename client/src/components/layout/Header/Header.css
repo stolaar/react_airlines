@@ -2,6 +2,7 @@
   margin-bottom: 0px;
   position: relative;
   background: none;
+  user-select: none;
 }
 .welcome {
   font-size: 100;

@@ -2,58 +2,38 @@
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { SET_CURRENT_USER, GET_ERRORS } from "./types";
-import { loginData, registerData } from "../helpers/queryData";
+import axios from "axios";
 
-export const loginUser = userData => async dispatch => {
-  try {
-    const result = await fetch("http://localhost:5000/graphql", {
-      method: "POST",
-      body: JSON.stringify(loginData(userData)),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    const resData = await result.json();
-    console.log(resData);
-    if (resData.data.login.data) {
-      const { token } = resData.data.login.data;
+export const loginUser = userData => dispatch => {
+  axios
+    .post("/api/users/login", userData)
+    .then(result => {
+      const { token } = result.data;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded));
-    } else {
+    })
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: { ...resData.data.login.errors }
+        payload: { ...err.response.data }
       });
-    }
-  } catch (e) {
-    console.log(e);
-  }
+    });
 };
 
-export const register = (newData, history) => async dispatch => {
-  try {
-    const result = await fetch("http://localhost:5000/graphql", {
-      method: "POST",
-      body: JSON.stringify(registerData(newData)),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    const resData = await result.json();
-    console.log(resData.data);
-    if (resData.data.register.success) {
-      history.push("/login");
-    } else {
+export const register = (newData, history) => dispatch => {
+  axios
+    .post("/api/users/register", newData)
+    .then(result => {
+      result.data.success && history.push("/login");
+    })
+    .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: { ...resData.data.register.errors }
-      });
-    }
-  } catch (e) {
-    console.log(e);
-  }
+        payload: { ...err.response.data }
+      })
+    );
 };
 
 export const setCurrentUser = decoded => {

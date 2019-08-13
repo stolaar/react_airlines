@@ -1,0 +1,16 @@
+.terms-btn:focus {
+  outline: 0;
+}
+.terms-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: cornflowerblue;
+}
+
+.terms p {
+  color: black !important;
+}
+.terms {
+  text-align: justify;
+}

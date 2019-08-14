@@ -1,20 +1,22 @@
 const express = require("express");
 const router = express.Router();
 
-const auth_controller = require("../../controllers/authController");
+const AuthController = require("../../controllers/AuthController");
 
-//const check_auth = require('../../middleware/checkAuth'); // @desc Checks if user is authenticated then continue
+const check_auth = require("../../middleware/checkAuth");
 
 // @route POST /api/users/login
 // @desc Checks for the user in database and returns token
 // @access Public
-router.post("/login", auth_controller.login);
-
-//router.post("/login", (req, res) => LoginController.Login.execute(req, res));
+router.post("/login", check_auth, (req, res) =>
+  new AuthController(req, res).login()
+);
 
 // @route POST /api/users/register
 // @desc Registers user
 // @access Public
-router.post("/register", auth_controller.register);
+router.post("/register", check_auth, (req, res) =>
+  new AuthController(req, res).register()
+);
 
 module.exports = router;

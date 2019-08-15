@@ -21,7 +21,7 @@ module.exports = class BaseController {
     return this._res.status(code).send(message);
   }
   ok(dto) {
-    if (!!dto) {
+    if (dto) {
       return this._res.status(200).json(dto);
     } else {
       return this._res.sendStatus(200);

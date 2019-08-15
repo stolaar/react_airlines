@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+const secret = require("../../config/keys").secretOrKey;
 module.exports = class BaseController {
   constructor(req, res, next) {
     this._req = req;
@@ -5,8 +7,18 @@ module.exports = class BaseController {
     this._next = next;
   }
 
+  async checkAuth(nextRoute) {
+    try {
+      const token = this._req.headers.authorization.split(" ")[1];
+      await jwt.verify(token, secret);
+      nextRoute();
+    } catch (e) {
+      return this.unauthorized();
+    }
+  }
+
   jsonResponse(code, message) {
-    return this._res.status(code).send({ ...message });
+    return this._res.status(code).send(message);
   }
   ok(dto) {
     if (!!dto) {

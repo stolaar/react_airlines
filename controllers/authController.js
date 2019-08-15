@@ -5,6 +5,8 @@ const validateRegister = require("../validation/register");
 const validateLogin = require("../validation/login");
 const User = require("../models/user");
 const BaseController = require("./BaseController/BaseController");
+const dotenv = require("dotenv");
+dotenv.config();
 
 module.exports = class AuthController extends BaseController {
   constructor(req, res) {
@@ -32,7 +34,9 @@ module.exports = class AuthController extends BaseController {
           name: user.name,
           email: user.email
         };
-        const token = await jwt.sign(payload, secret, { expiresIn: 36000 });
+        const token = await jwt.sign(payload, process.env.SECRET_KEY, {
+          expiresIn: 36000
+        });
         return this.ok({ success: true, token: `Bearer ${token}` });
       }
       if (!isMatch) {

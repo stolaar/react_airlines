@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const keys = require("./config/keys");
 const PORT = 5000;
 const dotenv = require("dotenv");
 dotenv.config();
@@ -20,7 +19,7 @@ app.use(bodyParser.json());
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log("MongoDB connected!"))
-  .catch(err => console.log(err));
+  .catch(err => console.log(err.message));
 app.use(passport.initialize());
 require("./config/passport")(passport);
 

@@ -1,19 +1,19 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const secret = require("../config/keys").secretOrKey;
 const validateRegister = require("../validation/register");
 const validateLogin = require("../validation/login");
-const User = require("../models/user");
-const BaseController = require("./BaseController/BaseController");
+const User = require("../models/User");
+const BaseController = require("./BaseController");
 const dotenv = require("dotenv");
 dotenv.config();
 
-module.exports = class AuthController extends BaseController {
+class AuthController extends BaseController {
   constructor(req, res) {
     super(req, res);
   }
 
   async login() {
+    console.log("Tried");
     const { errors, isValid } = validateLogin(this._req.body);
     if (!isValid) {
       return this.jsonResponse(400, errors);
@@ -21,8 +21,7 @@ module.exports = class AuthController extends BaseController {
     try {
       const user = await User.findOne({ email: this._req.body.email });
       if (!user) {
-        errors.email = "User not found";
-        return this.jsonResponse(400, errors);
+        return this.clientError({ email: "User not found" });
       }
       const isMatch = await bcrypt.compare(
         this._req.body.password,
@@ -35,13 +34,12 @@ module.exports = class AuthController extends BaseController {
           email: user.email
         };
         const token = await jwt.sign(payload, process.env.SECRET_KEY, {
-          expiresIn: 36000
+          expiresIn: 3600
         });
         return this.ok({ success: true, token: `Bearer ${token}` });
       }
       if (!isMatch) {
-        errors.password = "Invalid password!";
-        return this.jsonResponse(400, errors);
+        return this.clientError({ password: "Invalid password" });
       }
     } catch (err) {
       this.fail(err);
@@ -56,8 +54,7 @@ module.exports = class AuthController extends BaseController {
     try {
       const result = await User.findOne({ email: this._req.body.email });
       if (result) {
-        errors.email = "User already exist";
-        return this.jsonResponse(400, errors);
+        return this.clientError({ email: "User already exist" });
       }
       const hash = await bcrypt.hash(this._req.body.password, 12);
       const newUser = new User({
@@ -71,4 +68,5 @@ module.exports = class AuthController extends BaseController {
       return this.fail(err);
     }
   }
-};
+}
+module.exports = AuthController;

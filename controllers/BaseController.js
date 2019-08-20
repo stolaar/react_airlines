@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const secret = require("../../config/keys").secretOrKey;
 const dotenv = require("dotenv");
 dotenv.config();
 module.exports = class BaseController {

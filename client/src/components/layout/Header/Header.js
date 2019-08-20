@@ -15,12 +15,12 @@ function Header(props) {
           <div className="text-center">
             <h2 className="welcome">WELCOME TO</h2>
             <h2 className="brand display-7">
-              <strong> {props.heading} </strong>
+              <strong> {props.heading.toUpperCase()} </strong>
             </h2>
             <PanelTabs />
             <Panel />
-            <hr className="my-4" />
-            <div className="pb-4">
+            <br />
+            <div className="pb-2">
               <PageTabs />
             </div>
           </div>

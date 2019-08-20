@@ -1,0 +1,14 @@
+.signup-btn {
+  border: 1px solid salmon;
+  display: inline-block;
+  border-radius: 20px;
+  padding: 4px;
+  transform: translateY(3px);
+  width: 100px;
+  color: white;
+  text-align: center;
+}
+.signup-btn:hover {
+  color: salmon;
+  text-decoration: none;
+}

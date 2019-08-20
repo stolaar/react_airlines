@@ -49,7 +49,12 @@ const NavMenu = props => {
     guestLinks = (
       <React.Fragment>
         <NavLink linkTo="/login" text="Login" active={false} />
-        <NavLink linkTo="/register" text="Sign up" active={false} />
+        <NavLink
+          className="signup-btn "
+          linkTo="/register"
+          text="Sign up"
+          active={false}
+        />
       </React.Fragment>
     );
     authLinks = (

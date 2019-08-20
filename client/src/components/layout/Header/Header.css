@@ -1,12 +1,13 @@
 .jumbotron {
   margin-bottom: 0px;
+  padding: 2%;
   position: relative;
   background: none;
   user-select: none;
 }
 .welcome {
-  font-size: 100;
-  font-weight: 100;
+  font-size: 22px;
+  font-weight: 60;
   color: #d3d3d3;
 }
 .brand {
@@ -23,15 +24,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("../../../assets/header-background.jpg");
-  background-position: 0% 25%;
+  background-image: url("../../../assets/header-background.png");
+  background-position: 0% 10%;
   background-size: cover;
+  opacity: 0.6;
   background-repeat: no-repeat;
   /* filter: grayscale(60%); */
 }
 
 .content-bg {
-  background-color: rgb(128, 128, 128, 0.7);
+  background-color: rgb(128, 128, 128, 0.5);
   border-radius: 7px;
   padding: 10px 10px;
   position: relative;

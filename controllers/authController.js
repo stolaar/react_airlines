@@ -13,7 +13,6 @@ class AuthController extends BaseController {
   }
 
   async login() {
-    console.log("Tried");
     const { errors, isValid } = validateLogin(this._req.body);
     if (!isValid) {
       return this.jsonResponse(400, errors);

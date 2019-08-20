@@ -15,26 +15,7 @@ import ServicePage from "./components/pages/ServicePage/ServicePage";
 import RentCar from "./components/pages/RentCar/RentCar";
 import Book from "./components/pages/Book/Book";
 import Admin from "./components/pages/Admin/Admin";
-const headingLead = `This is a simple hero unit, a simple jumbotron-style component for
-calling extra attention to featured content or information.`;
-
-const navProps = {};
-navProps.brand = { linkTo: "/", text: "Airlineser" };
-navProps.links = [
-  { linkTo: "/", text: "Offers" },
-  { linkTo: "/", text: "Destinations" },
-  {
-    dropdown: true,
-    text: "Plans",
-    links: [
-      { linkTo: "/", text: "Link1" },
-      { linkTo: "/", text: "Dropdown Link 2", active: true }
-    ]
-  }
-];
-
-const subNavProps = {};
-subNavProps.brand = { linkTo: "/", text: "Search" };
+import { navProps, subNavProps } from "./navLinks";
 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
@@ -46,11 +27,11 @@ if (localStorage.jwtToken) {
   }
 }
 
-function App(props) {
+function App() {
   return (
     <React.Fragment>
       <Navigation linkId="navbarNav" {...navProps} />
-      <Header heading={navProps.brand.text} lead={headingLead} />
+      <Header heading={navProps.brand.text} />
       <div className="container">
         <Navigation linkId="navbarSub" borderRadius={"7px"} {...subNavProps} />
         <Switch>

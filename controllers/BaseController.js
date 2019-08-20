@@ -12,7 +12,7 @@ module.exports = class BaseController {
     try {
       const token = this._req.headers.authorization.split(" ")[1];
       await jwt.verify(token, process.env.SECRET_KEY);
-      nextRoute();
+      return nextRoute;
     } catch (e) {
       return this.unauthorized();
     }

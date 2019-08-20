@@ -8,10 +8,10 @@ class BookingController extends BaseController {
   }
 
   async bookFlight() {
-    console.log("Flight booked");
+    return this.ok("Flight booked");
   }
   async cancelFlight() {
-    console.log("Flight cancelled");
+    return this.ok("Flight cancelled");
   }
 }
 

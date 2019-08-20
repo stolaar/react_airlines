@@ -24,6 +24,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/bookings", require("./routes/api/bookings"));
 app.listen(PORT, () => {
   console.log("App listening to port " + PORT);
 });

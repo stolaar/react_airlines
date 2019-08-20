@@ -14,14 +14,10 @@ class AuthController extends BaseController {
 
   async login() {
     const { errors, isValid } = validateLogin(this._req.body);
-    if (!isValid) {
-      return this.jsonResponse(400, errors);
-    }
+    if (!isValid) return this.jsonResponse(400, errors);
     try {
       const user = await User.findOne({ email: this._req.body.email });
-      if (!user) {
-        return this.clientError({ email: "User not found" });
-      }
+      if (!user) return this.clientError({ email: "User not found" });
       const isMatch = await bcrypt.compare(
         this._req.body.password,
         user.password
@@ -32,14 +28,10 @@ class AuthController extends BaseController {
           name: user.name,
           email: user.email
         };
-        const token = await jwt.sign(payload, process.env.SECRET_KEY, {
-          expiresIn: 3600
-        });
+        const token = await this.signJWT(payload);
         return this.ok({ success: true, token: `Bearer ${token}` });
       }
-      if (!isMatch) {
-        return this.clientError({ password: "Invalid password" });
-      }
+      if (!isMatch) return this.clientError({ password: "Invalid password" });
     } catch (err) {
       this.fail(err);
     }
@@ -47,25 +39,27 @@ class AuthController extends BaseController {
 
   async register() {
     const { errors, isValid } = validateRegister(this._req.body);
-    if (!isValid) {
-      return this.jsonResponse(400, errors);
-    }
+    if (!isValid) return this.jsonResponse(400, errors);
     try {
       const result = await User.findOne({ email: this._req.body.email });
-      if (result) {
-        return this.clientError({ email: "User already exist" });
-      }
-      const hash = await bcrypt.hash(this._req.body.password, 12);
+      if (result) return this.clientError({ email: "User already exist" });
+      const hash = bcrypt.hashSync(this._req.body.password, 12);
       const newUser = new User({
         name: this._req.body.name,
         email: this._req.body.email,
         password: hash
       });
       await newUser.save();
-      return this.ok({ success: true });
+      return this.ok();
     } catch (err) {
       return this.fail(err);
     }
+  }
+
+  signJWT(payload) {
+    return jwt.sign(payload, process.env.SECRET_KEY, {
+      expiresIn: 3600
+    });
   }
 }
 module.exports = AuthController;

@@ -26,7 +26,7 @@ export const register = (newData, history) => dispatch => {
   axios
     .post("/api/users/register", newData)
     .then(result => {
-      result.data.success && history.push("/login");
+      result.status === 200 && history.push("/login");
     })
     .catch(err =>
       dispatch({

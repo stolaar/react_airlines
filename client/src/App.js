@@ -16,6 +16,8 @@ import RentCar from "./components/pages/RentCar/RentCar";
 import Book from "./components/pages/Book/Book";
 import Admin from "./components/pages/Admin/Admin";
 import { navProps, subNavProps } from "./navLinks";
+import ProtectedRoute from "./utils/protectedRoute";
+import BookFlight from "./components/pages/Book/BookFlight";
 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
@@ -41,6 +43,7 @@ function App() {
           <Route path="/rent-a-car" component={RentCar} />
           <Route path="/book-a-hotel" component={Book} />
           <Route path="/admin" component={Admin} />
+          <ProtectedRoute path="/book-flight" component={BookFlight} />
         </Switch>
       </div>
       <Footer />

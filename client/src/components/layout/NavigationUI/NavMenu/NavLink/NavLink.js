@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const NavLink = props => {
   const onClick = () => {
     window.scroll(0, 700);
-    return props.onClick;
+    return props.onClick ? props.onClick() : null;
   };
   return (
     <li className={"nav-item " + props.active ? "active" : ""}>

@@ -10,17 +10,17 @@ COPY package*.json ./
 WORKDIR /usr/src/app/client
 # Navigate to client directory and install dependencies
 RUN cd ./client
-RUN npm install
+RUN npm ci --only=production
 RUN npm run build
 # Return to the root directory and install server dependecies
 RUN cd ..
 WORKDIR /usr/src/app
-RUN npm install
+RUN npm ci --only=production
 # If you are building your code for production
 # RUN npm ci --only=production
 
 # Bundle app source
 COPY . .
 
-EXPOSE 8080
-CMD [ "node", "server.js" ]
+EXPOSE 5001
+CMD [ "npm", "start" ]

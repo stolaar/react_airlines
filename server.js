@@ -25,6 +25,15 @@ require("./config/passport")(passport);
 
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/bookings", require("./routes/api/bookings"));
+
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "client/build/index.html"), function(err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 app.listen(PORT, () => {
   console.log("App listening to port " + PORT);
 });

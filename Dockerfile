@@ -11,7 +11,7 @@ RUN npm ci --only=production
 # Navigate to client directory and install dependencies
 WORKDIR /usr/src/app/client
 RUN npm ci --only=production
-RUN npm run build
+RUN npm run-script build
 # Return to the root directory and install server dependecies
 WORKDIR /usr/src/app
 

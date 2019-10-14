@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-dockerd-rootless.sh --experimental
 
 export BUILD_NUMBER=$(git describe --tags --always --dirty="-dev")
 export BRANCH_NAME=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)

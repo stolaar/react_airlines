@@ -1,23 +1,19 @@
-FROM node:10
+FROM node:10-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
-COPY package*.json ./
+COPY . .
 
-# Create client directory
-WORKDIR /usr/src/app/client
+# Install app dependencies
+RUN npm ci --only=production
+
 # Navigate to client directory and install dependencies
-RUN cd ./client
+WORKDIR /usr/src/app/client
 RUN npm ci --only=production
-RUN npm run build
+RUN npm run-script build
 # Return to the root directory and install server dependecies
-RUN cd ..
 WORKDIR /usr/src/app
-RUN npm ci --only=production
-# If you are building your code for production
-# RUN npm ci --only=production
 
 # Bundle app source
 COPY . .

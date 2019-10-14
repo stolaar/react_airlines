@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const PORT = 5000;
 const dotenv = require("dotenv");
 dotenv.config();
+const path = require("path");
 
 app.disable("X-Powered-By");
 app.use(function(req, res, next) {
@@ -25,6 +26,8 @@ require("./config/passport")(passport);
 
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/bookings", require("./routes/api/bookings"));
+
+app.use(express.static(path.join(__dirname, "client/build/")));
 
 app.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname, "client/build/index.html"), function(err) {

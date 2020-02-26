@@ -7,5 +7,5 @@ export JOB_BASE_NAME="airlines"
 
 echo "Starting docker container"
 docker-compose up --build
-
+echo "Shutting down the container"
 docker-compose down --rmi "all"
